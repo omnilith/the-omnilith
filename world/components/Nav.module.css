@@ -1,47 +1,70 @@
-.nav {
+@keyframes glitch {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.mainNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  font-family: "Orbitron", sans-serif;
+  background: rgba(10, 10, 20, 0.8);
+  border-color: white;
+  /* box-shadow: 0 0 10px rgba(0, 255, 255, 0.8); */
+  position: relative;
+  overflow: hidden;
   position: sticky;
   top: 0;
-  z-index: 50;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  padding: 0.75rem 0;
+  z-index: 1000;
 }
 
-.navInner {
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1.5rem;
-}
-
-.logo {
-  font-size: 1.5rem;
+.mainNav div span {
+  font-size: 1.8rem;
   font-weight: bold;
-  color: #2563eb;
-  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgb(235, 234, 245); /* Neon cyan */
+  letter-spacing: 2px;
+  position: relative;
+  text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
 }
 
-.navList {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navItem a {
-  color: #374151;
-  font-weight: 500;
+.mainLogo {
   text-decoration: none;
-  transition: color 0.2s;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  color: white;
 }
 
-.navItem a:hover,
-.navItem a.active {
-  color: #2563eb;
-  background: #f1f5f9;
+.rightLink {
+  margin: 0 15px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: rgb(250, 237, 246);
+  transition: color 0.5s ease-in-out;
+  position: relative;
+}
+
+.rightLink:hover {
+  color: #0ff;
+  text-decoration: underline;
+}
+
+.mainNav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 200%;
+  height: 100%;
+  transform: translateX(-50%);
+  animation: glitch 2s infinite linear;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.mainNav:hover {
+  animation: glitch 0.4s linear infinite;
 }
