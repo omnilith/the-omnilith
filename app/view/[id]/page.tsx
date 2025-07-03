@@ -15,8 +15,8 @@ async function page({
   params,
   searchParams,
 }: {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { id } = await params;
   const { entityId } = (await searchParams) as {
@@ -31,7 +31,7 @@ async function page({
 
   return (
     <div>
-      <Renderer entities={entities as BlogType[]} />
+      <Renderer entities={entities as unknown as BlogType[]} />
     </div>
   );
 }

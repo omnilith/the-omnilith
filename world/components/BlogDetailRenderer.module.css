@@ -1,11 +1,24 @@
+/* Blog Container */
+.blogContainer {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Blog Detail Container */
 .blogDetail {
   background: rgba(20, 20, 20, 0.9);
-  padding: 32px 40px;
+  padding: 48px 64px;
   border-radius: 16px;
   border: 2px solid rgba(0, 255, 255, 0.3);
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 1100px;
+  margin: 60px auto;
   font-family: "Orbitron", sans-serif;
   color: #ccc;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
@@ -31,19 +44,6 @@
   z-index: 1;
 }
 
-/* Featured Image */
-.featuredImage {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 255, 255, 0.4);
-  margin: 0 auto 24px auto;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-  display: block;
-}
-
 /* Title */
 .title {
   font-size: 2.5rem;
@@ -55,6 +55,13 @@
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
   position: relative;
   z-index: 2;
+  text-align: center;
+}
+
+.blogTitle {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -72,6 +79,45 @@
 .author strong {
   color: #0ff;
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+/* Featured Image */
+.featuredImage {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  margin: 0 auto 24px auto;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  display: block;
+}
+
+.blogImage {
+  width: 35%;
+  height: auto;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Meta Information */
+.blogMeta {
+  font-size: 1.1rem;
+  color: #bbbbbb;
+  text-align: center;
+}
+
+/* Categories */
+.blogCategories {
+  font-size: 1.1rem;
+  color: #ffaa00;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 /* Content Container */
@@ -180,6 +226,16 @@
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
 }
 
+/* YouTube Embed */
+.youtubeEmbed {
+  width: 100%;
+}
+
+/* Loading */
+.loading {
+  width: 100%;
+}
+
 /* No Blog Found */
 .noBlog {
   background: rgba(20, 20, 20, 0.9);
@@ -191,4 +247,16 @@
   font-size: 1.2rem;
   max-width: 400px;
   margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .blogContainer {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .blogImage {
+    width: 80%;
+  }
 }
