@@ -9,7 +9,7 @@ function BlogListRenderer({ entities }: { entities: BlogType[] }) {
       {entities.map((blog) => (
         <li key={blog.id} className={styles.blogItem}>
           <Link
-            href={`/view/view-BlogDetailView?entityId=${blog.id}`}
+            href={`/view/view-postDetailView?entityId=${blog.id}`}
             className={styles.cardLink}
           >
             {blog.featuredImage && (

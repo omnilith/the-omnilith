@@ -4,7 +4,7 @@ import styles from "./Nav.module.css";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Blog", href: "/view/view-BlogsListView" },
+  { label: "Blog", href: "/view/view-postListView" },
 ];
 
 const Nav: React.FC = () => (
