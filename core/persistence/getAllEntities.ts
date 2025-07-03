@@ -1,10 +1,15 @@
+import { supabase } from "../utils/supabase";
 import { entities } from "../data/entities";
-import { query } from "../db";
 import { convertDBtoAppEntities } from "../utils/convertDBEntity";
 
 export const getAllEntities = async <T extends keyof typeof entities>(
   type: T
 ) => {
-  const rows = await query(`SELECT * FROM entity WHERE type = $1`, [type]);
-  return convertDBtoAppEntities(rows);
+  const { data, error } = await supabase
+    .from("entity")
+    .select("*")
+    .eq("type", type);
+
+  if (error) throw new Error(error.message);
+  return convertDBtoAppEntities(data);
 };

@@ -1,10 +1,17 @@
-// import { entities } from "../data/entities";
-import { query } from "../db";
+import { supabase } from "../utils/supabase";
 import { convertDBtoAppEntity } from "../utils/convertDBEntity";
 
-// type EntityType = keyof typeof entities;
-
 export const getEntityById = async (id: string) => {
-  const rows = await query(`SELECT * FROM entity WHERE id = $1`, [id]);
-  return rows.length > 0 ? convertDBtoAppEntity(rows[0]) : null;
+  const { data, error } = await supabase
+    .from("entity")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    if (error.code === "PGRST116") return null;
+    throw new Error(error.message);
+  }
+
+  return convertDBtoAppEntity(data);
 };
