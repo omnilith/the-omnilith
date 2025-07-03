@@ -8,18 +8,18 @@ const navItems = [
 ];
 
 const Nav: React.FC = () => (
-  <nav className={styles.nav}>
-    <div className={styles.navInner}>
-      <span className={styles.logo}>Omnilith</span>
-      <ul className={styles.navList}>
-        {navItems.map((item) => (
-          <li key={item.href} className={styles.navItem}>
-            <Link href={item.href} className={styles.navLink}>
-              {item.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+  <nav className={styles.mainNav}>
+    <div>
+      <Link href="/" className={styles.mainLogo}>
+        <span>Omnilith</span>
+      </Link>
+    </div>
+    <div>
+      {navItems.map((item) => (
+        <Link key={item.href} href={item.href} className={styles.rightLink}>
+          {item.label}
+        </Link>
+      ))}
     </div>
   </nav>
 );

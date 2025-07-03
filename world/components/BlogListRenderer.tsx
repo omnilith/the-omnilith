@@ -1,15 +1,39 @@
 import { BlogType } from "@core/core/data/entities";
+import Link from "next/link";
+import Image from "next/image";
+import styles from "./BlogListRenderer.module.css";
 
 function BlogListRenderer({ entities }: { entities: BlogType[] }) {
   return (
-    <div>
+    <ul className={styles.blogList}>
       {entities.map((blog) => (
-        <div key={blog.id}>
-          <h3>{blog.title}</h3>
-          <p>Author: {blog.author}</p>
-        </div>
+        <li key={blog.id} className={styles.blogItem}>
+          <Link
+            href={`/view/view-BlogDetailView?entityId=${blog.id}`}
+            className={styles.cardLink}
+          >
+            {blog.featuredImage && (
+              <Image
+                src={blog.featuredImage}
+                alt={blog.title}
+                width={120}
+                height={120}
+                style={{
+                  objectFit: "cover",
+                  borderRadius: 16,
+                  marginRight: 24,
+                }}
+              />
+            )}
+            <div className={styles.content}>
+              <h2>{blog.title}</h2>
+              {/* <p>{blog.content.slice(0, 100)}...</p> */}
+              <p>Author: {blog.author}</p>
+            </div>
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
