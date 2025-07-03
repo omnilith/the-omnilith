@@ -5,13 +5,13 @@ export const loadEntitiesWithView = async (
   viewId: string,
   entityId?: string
 ) => {
-  const view = await getEntityById("View", viewId);
+  const view = await getEntityById(viewId);
   if (!view) {
     throw new Error(`View with ID ${viewId} not found`);
   }
   if ("targetEntity" in view && typeof view.targetEntity === "string") {
     if (entityId) {
-      const entity = getEntityById(view.targetEntity, entityId);
+      const entity = await getEntityById(entityId);
       if (!entity) {
         throw new Error(
           `Entity with ID ${entityId} not found in targetEntity ${view.targetEntity}`
@@ -20,7 +20,7 @@ export const loadEntitiesWithView = async (
       return { entities: [entity], view };
     }
     const entities = await getAllEntities(
-      view.targetEntity as "Form" | "Blog" | "View"
+      view.targetEntity as "Form" | "Post" | "View"
     );
     return { entities, view };
   } else {

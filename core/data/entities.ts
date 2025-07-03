@@ -131,4 +131,5 @@ export const entities = {
   Form: [Form, Blog, View],
   Blog: [Blog1],
   View: [BlogsListView, BlogDetailView],
+  Post: [],
 };

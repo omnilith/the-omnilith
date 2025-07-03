@@ -1,11 +1,10 @@
-import { entities } from "../data/entities";
+// import { entities } from "../data/entities";
+import { query } from "../db";
+import { convertDBtoAppEntity } from "../utils/convertDBEntity";
 
-type EntityType = keyof typeof entities;
+// type EntityType = keyof typeof entities;
 
-export const getEntityById = (type: string, id: string) => {
-  if (!(type in entities)) return null;
-  const entity = entities[type as EntityType]?.find(
-    (entity) => entity.id === id
-  );
-  return entity || null;
+export const getEntityById = async (id: string) => {
+  const rows = await query(`SELECT * FROM entity WHERE id = $1`, [id]);
+  return rows.length > 0 ? convertDBtoAppEntity(rows[0]) : null;
 };
