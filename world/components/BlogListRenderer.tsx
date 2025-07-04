@@ -18,11 +18,7 @@ function BlogListRenderer({ entities }: { entities: BlogType[] }) {
                 alt={blog.title}
                 width={120}
                 height={120}
-                style={{
-                  objectFit: "cover",
-                  borderRadius: 16,
-                  marginRight: 24,
-                }}
+                className={styles.blogImage}
               />
             )}
             <div className={styles.content}>
