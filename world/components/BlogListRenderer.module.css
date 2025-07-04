@@ -13,6 +13,7 @@
   height: auto;
   cursor: pointer;
   overflow: hidden;
+  font-family: "Orbitron", sans-serif;
   box-sizing: border-box; /* Prevents extra spacing issues */
 }
 
