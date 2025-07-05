@@ -6,7 +6,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const entities = loadEntitiesWithView(id);
+  const entities = await loadEntitiesWithView(id);
   return NextResponse.json(entities, {
     status: 200,
     headers: {

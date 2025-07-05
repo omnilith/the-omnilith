@@ -1,3 +1,5 @@
+"use server";
+
 import { getEntityById } from "./persistence/getEntityById";
 import { getAllEntities } from "./persistence/getAllEntities";
 
