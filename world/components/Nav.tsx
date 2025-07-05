@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styles from "./Nav.module.css";
-import { createClient } from "@core/core/utils/supabase/server";
+// import { createClient } from "@core/core/utils/supabase/server";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -9,10 +9,10 @@ const navItems = [
 ];
 
 export default async function Nav() {
-  const supabase = await createClient();
+  // const supabase = await createClient();
 
-  const { data, error } = await supabase.auth.getUser();
-  console.log("User data:", data, "Error:", error);
+  // const { data, error } = await supabase.auth.getUser();
+  // console.log("User data:", data, "Error:", error);
 
   return (
     <nav className={styles.mainNav}>
