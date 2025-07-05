@@ -1,8 +1,8 @@
-import { createClient } from "../utils/supabase";
+import { createClient } from "../utils/supabase/server";
 import { convertDBtoAppEntity } from "../utils/convertDBEntity";
 
 export const getEntityById = async (id: string) => {
-  const supabase = createClient(); // 👈 call it *inside* the function
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("entity")
     .select("*")
