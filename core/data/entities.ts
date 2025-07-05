@@ -32,14 +32,14 @@ export const Blog = {
   ],
 };
 
-// TypeScript type based on the Blog schema above
 export interface BlogType {
   id: string;
   type: "Blog";
   title: string;
   content: string;
   author: string;
-  featuredImage?: string; // Optional field for thumbnail image
+  featuredImage?: string;
+  featuredVideo?: string;
 }
 
 export const View = {
