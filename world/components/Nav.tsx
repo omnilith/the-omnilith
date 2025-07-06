@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import styles from "./Nav.module.css";
-import { createClient } from "@adapters/supabase/server";
-import LogoutButton from "./LogoutButton";
+// import { createClient } from "@adapters/supabase/server";
+// import LogoutButton from "./LogoutButton";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -10,8 +10,8 @@ const navItems = [
 ];
 
 export default async function Nav() {
-  const supabase = await createClient();
-  const { data } = await supabase.auth.getUser();
+  // const supabase = await createClient();
+  // const { data } = await supabase.auth.getUser();
 
   return (
     <nav className={styles.mainNav}>
@@ -26,13 +26,13 @@ export default async function Nav() {
             {item.label}
           </Link>
         ))}
-        {data?.user ? (
+        {/* {data?.user ? (
           <LogoutButton />
         ) : (
           <Link href="/login" className={styles.rightLink}>
             Login
           </Link>
-        )}
+        )} */}
       </div>
     </nav>
   );
