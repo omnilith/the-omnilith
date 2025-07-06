@@ -8,7 +8,6 @@ export const loadEntitiesWithView = async (
   entityId?: string
 ) => {
   const view = await getEntityById(viewId);
-  console.log("Loaded view:", view);
   if (!view) {
     throw new Error(`View with ID ${viewId} not found`);
   }
