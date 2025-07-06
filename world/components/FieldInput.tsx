@@ -1,5 +1,7 @@
 "use client";
 
+import styles from "./FieldInput.module.css";
+
 export function FieldInput({
   type,
   value,
@@ -14,6 +16,7 @@ export function FieldInput({
   if (type === "text") {
     return (
       <input
+        className={styles.fieldInput}
         value={value as string}
         onChange={(e) => onChange(e.target.value)}
       />
@@ -24,6 +27,7 @@ export function FieldInput({
     return (
       <input
         type="number"
+        className={styles.fieldInput}
         value={value as number}
         onChange={(e) => onChange(Number(e.target.value))}
       />
@@ -34,6 +38,7 @@ export function FieldInput({
     return (
       <input
         type="checkbox"
+        className={styles.fieldInput}
         checked={!!value}
         onChange={(e) => onChange(e.target.checked)}
       />
@@ -43,6 +48,7 @@ export function FieldInput({
   if (type === "select") {
     return (
       <select
+        className={styles.fieldInputSelect}
         value={value as string}
         onChange={(e) => onChange(e.target.value)}
       >
@@ -58,6 +64,7 @@ export function FieldInput({
   if (type === "json-editor") {
     return (
       <textarea
+        className={styles.fieldInputTextarea}
         value={JSON.stringify(value, null, 2)}
         onChange={(e) => {
           try {
@@ -71,6 +78,7 @@ export function FieldInput({
   if (type === "rich-text") {
     return (
       <textarea
+        className={styles.fieldInputTextarea}
         value={value as string}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Enter Markdown here..."

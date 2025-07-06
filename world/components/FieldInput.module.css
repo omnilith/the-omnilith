@@ -1,0 +1,65 @@
+/* Cyberpunk minimal style for FieldInput */
+
+.fieldInput {
+  width: 100%;
+  background: #23242a;
+  border: 1.5px solid #ff00cc;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 1rem;
+  font-family: "Share Tech Mono", "Fira Mono", monospace, sans-serif;
+  padding: 0.6rem 1rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 8px #ff00cc33;
+}
+
+.fieldInput:focus {
+  border-color: #0fffc3;
+  box-shadow: 0 0 16px #0fffc399, 0 0 8px #ff00cc55;
+}
+
+.fieldInput[type="checkbox"] {
+  width: auto;
+  accent-color: #0fffc3;
+  box-shadow: none;
+}
+
+.fieldInputSelect {
+  width: 100%;
+  background: #23242a;
+  border: 1.5px solid #0fffc3;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 1rem;
+  font-family: "Share Tech Mono", "Fira Mono", monospace, sans-serif;
+  padding: 0.6rem 1rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 8px #0fffc333;
+}
+
+.fieldInputSelect:focus {
+  border-color: #ff00cc;
+  box-shadow: 0 0 16px #ff00cc99, 0 0 8px #0fffc355;
+}
+
+.fieldInputTextarea {
+  width: 100%;
+  background: #181a20;
+  border: 1.5px solid #0fffc3;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 1rem;
+  font-family: "Share Tech Mono", "Fira Mono", monospace, sans-serif;
+  padding: 0.8rem 1rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 8px #0fffc333;
+  resize: vertical;
+}
+
+.fieldInputTextarea:focus {
+  border-color: #ff00cc;
+  box-shadow: 0 0 16px #ff00cc99, 0 0 8px #0fffc355;
+}

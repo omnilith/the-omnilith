@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FieldInput } from "./FieldInput";
 import { Entity } from "@core/entities/entityTypes";
+import styles from "./EntityEditor.module.css";
 
 export function EntityEditor({
   form,
@@ -45,15 +46,15 @@ export function EntityEditor({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.entityEditorForm}>
       <h2>{String(form.essence.name)}</h2>
 
       {fields.map((field) => {
         const def = field.essence;
         const value = essence[def.key as string] ?? def.default ?? "";
         return (
-          <div key={String(def.key)}>
-            <label>
+          <div key={String(def.key)} className={styles.entityEditorField}>
+            <label className={styles.entityEditorLabel}>
               {String(def.label)}
               {def.required ? " *" : ""}
             </label>
@@ -71,7 +72,11 @@ export function EntityEditor({
         );
       })}
 
-      <button type="submit" disabled={submitting}>
+      <button
+        type="submit"
+        className={styles.entityEditorButton}
+        disabled={submitting}
+      >
         {submitting ? "Saving..." : "Save"}
       </button>
     </form>
