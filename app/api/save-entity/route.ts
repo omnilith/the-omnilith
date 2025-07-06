@@ -6,14 +6,12 @@ export async function POST(req: Request) {
   const body = await req.json();
 
   const entity = {
-    id: body.type.toLowerCase() + "-" + uuidv4(), // ✅ generate unique ID
+    id: body.type.toLowerCase() + "-" + uuidv4(),
     type: body.type,
     essence: body.essence,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
-
-  console.log("Creating entity:", entity);
 
   try {
     await createEntity(entity);
