@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Orbitron, Electrolize } from "next/font/google";
 import "./globals.css";
-import Nav from "@core/world/components/Nav";
+import Nav from "@world/components/Nav";
 
 const orbitron = Orbitron({
   variable: "--font-orbitron",

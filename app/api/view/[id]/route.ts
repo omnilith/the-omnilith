@@ -1,4 +1,4 @@
-import { loadEntitiesWithView } from "@core/core/actions";
+import { loadEntitiesWithView } from "@lib/queries/loadEntitiesWithView";
 import { NextResponse } from "next/server";
 
 export async function GET(

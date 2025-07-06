@@ -1,4 +1,4 @@
-import { Entity } from "@core/core/entities/entityTypes";
+import { Entity } from "@core/entities/entityTypes";
 
 // Supabase DB shape
 export interface DBEntity {

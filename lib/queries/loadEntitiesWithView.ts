@@ -1,7 +1,7 @@
 "use server";
 
-import { getEntityById } from "./entities/entityService";
-import { getEntitiesByType } from "./entities/entityService";
+import { getEntityById } from "@lib/persistence/entityService";
+import { getEntitiesByType } from "@lib/persistence/entityService";
 
 export const loadEntitiesWithView = async (
   viewId: string,
