@@ -1,7 +1,8 @@
 import { loadEntitiesWithView } from "@core/core/actions";
 import BlogListRenderer from "@core/world/components/BlogListRenderer";
 import BlogDetailRenderer from "@core/world/components/BlogDetailRenderer";
-import { BlogType } from "@core/core/data/entities";
+// import { BlogType } from "@core/core/data/entities";
+import { Entity } from "@core/core/entities/entityTypes";
 
 type RendererKey = keyof typeof rendererMap;
 
@@ -24,14 +25,14 @@ async function page({
   };
   const { entities, view } = await loadEntitiesWithView(id, entityId);
 
-  const Renderer = rendererMap[view.rendererComponent as RendererKey];
+  const Renderer = rendererMap[view.essence.rendererComponent as RendererKey];
   if (!Renderer) {
     throw new Error(`No renderer found for view type: ${view.id}`);
   }
 
   return (
     <div>
-      <Renderer entities={entities as unknown as BlogType[]} />
+      <Renderer entities={entities as unknown as Entity[]} />
     </div>
   );
 }

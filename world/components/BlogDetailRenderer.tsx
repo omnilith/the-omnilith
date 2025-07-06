@@ -1,7 +1,8 @@
-import { BlogType } from "@core/core/data/entities";
+// import { BlogType } from "@core/core/data/entities";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import styles from "./BlogDetailRenderer.module.css";
+import { Entity } from "@core/core/entities/entityTypes";
 
 function getYouTubeEmbedUrl(url: string) {
   // Extract the video ID from various YouTube URL formats
@@ -11,30 +12,30 @@ function getYouTubeEmbedUrl(url: string) {
   return match ? `https://www.youtube.com/embed/${match[1]}` : null;
 }
 
-function BlogDetailRenderer({ entities }: { entities: BlogType[] }) {
+function BlogDetailRenderer({ entities }: { entities: Entity[] }) {
   const blog = entities[0];
   if (!blog) return <div className={styles.noBlog}>No blog found.</div>;
 
-  const embedUrl = blog.featuredVideo
-    ? getYouTubeEmbedUrl(blog.featuredVideo)
+  const embedUrl = blog.essence.featuredVideo
+    ? getYouTubeEmbedUrl(blog.essence.featuredVideo as string)
     : null;
 
   return (
     <article className={styles.blogDetail}>
-      {blog.featuredImage && (
+      {typeof blog.essence.featuredImage === "string" && (
         <Image
-          src={blog.featuredImage}
-          alt={blog.title}
+          src={blog.essence.featuredImage}
+          alt={typeof blog.essence.title === "string" ? blog.essence.title : ""}
           width={400}
           height={250}
           className={styles.featuredImage}
         />
       )}
 
-      <h1 className={styles.title}>{blog.title}</h1>
+      <h1 className={styles.title}>{blog.essence.title as string}</h1>
 
       <p className={styles.author}>
-        <strong>Author:</strong> {blog.author}
+        <strong>Author:</strong> {blog.essence.author as string}
       </p>
 
       {embedUrl && (
@@ -57,7 +58,7 @@ function BlogDetailRenderer({ entities }: { entities: BlogType[] }) {
 
       <div className={styles.contentContainer}>
         <div className={styles.markdownContent}>
-          <ReactMarkdown>{blog.content}</ReactMarkdown>
+          <ReactMarkdown>{blog.essence.content as string}</ReactMarkdown>
         </div>
       </div>
     </article>
