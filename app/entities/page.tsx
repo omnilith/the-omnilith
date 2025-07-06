@@ -3,9 +3,10 @@ import { EntityEditor } from "@world/components/EntityEditor";
 
 async function page() {
   const { form, fields } = await loadFormWithFields("form-Post");
+  console.log("Form loaded:", form);
   return (
     <div>
-      <EntityEditor form={form} fields={fields} initialEssence={form.essence} />
+      <EntityEditor form={form} fields={fields} />
     </div>
   );
 }

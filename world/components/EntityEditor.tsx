@@ -29,7 +29,7 @@ export function EntityEditor({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: form.type,
+          type: form.essence.name,
           essence,
         }),
       });

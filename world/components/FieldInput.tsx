@@ -68,7 +68,6 @@ export function FieldInput({
     );
   }
 
-  // Support for rich-text (markdown)
   if (type === "rich-text") {
     return (
       <textarea
