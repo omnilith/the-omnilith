@@ -1,4 +1,4 @@
-import { Entity } from "@core/core/entities/entityTypes";
+import { Entity } from "@core/entities/entityTypes";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./BlogListRenderer.module.css";
