@@ -2,7 +2,7 @@ import { loadFormWithFields } from "@lib/queries/loadFormWithFields";
 import { EntityEditor } from "@world/components/EntityEditor";
 
 type PageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 async function Page({ params }: PageProps) {
