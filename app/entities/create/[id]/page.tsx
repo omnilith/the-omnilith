@@ -1,8 +1,13 @@
 import { loadFormWithFields } from "@lib/queries/loadFormWithFields";
 import { EntityEditor } from "@world/components/EntityEditor";
 
-async function page() {
-  const { form, fields } = await loadFormWithFields("form-Post");
+type PageProps = {
+  params: { id: string };
+};
+
+async function Page({ params }: PageProps) {
+  const { id } = await params;
+  const { form, fields } = await loadFormWithFields(id);
   return (
     <div>
       <EntityEditor form={form} fields={fields} />
@@ -10,4 +15,4 @@ async function page() {
   );
 }
 
-export default page;
+export default Page;
