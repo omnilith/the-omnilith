@@ -1,1 +1,1 @@
-export { supabaseEntityRepo as entityRepo } from "@core/adapters/supabase/supabaseEntityRepo";
+export { supabaseEntityRepo as entityRepo } from "@adapters/supabase/supabaseEntityRepo";

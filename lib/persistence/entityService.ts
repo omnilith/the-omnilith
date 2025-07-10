@@ -1,5 +1,5 @@
-import { entityRepo } from "@core/lib/persistence/entityRepo";
-import { Entity } from "./entityTypes";
+import { entityRepo } from "@lib/persistence/entityRepo";
+import { Entity } from "@core/entities/entityTypes";
 
 export const getEntityById = (id: string) => {
   return entityRepo.getById(id);

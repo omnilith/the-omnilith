@@ -1,8 +1,8 @@
-import { loadEntitiesWithView } from "@core/core/actions";
-import BlogListRenderer from "@core/world/components/BlogListRenderer";
-import BlogDetailRenderer from "@core/world/components/BlogDetailRenderer";
+import { loadEntitiesWithView } from "@lib/queries/loadEntitiesWithView";
+import BlogListRenderer from "@world/components/BlogListRenderer";
+import BlogDetailRenderer from "@world/components/BlogDetailRenderer";
 // import { BlogType } from "@core/core/data/entities";
-import { Entity } from "@core/core/entities/entityTypes";
+import { Entity } from "@core/entities/entityTypes";
 
 type RendererKey = keyof typeof rendererMap;
 

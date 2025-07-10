@@ -1,17 +1,13 @@
 "use server";
 
-// import { getEntityById } from "./persistence/getEntityById";
-// import { getAllEntities } from "./persistence/getAllEntities";
-
-import { getEntityById } from "./entities/entityService";
-import { getEntitiesByType } from "./entities/entityService";
+import { getEntityById } from "@lib/persistence/entityService";
+import { getEntitiesByType } from "@lib/persistence/entityService";
 
 export const loadEntitiesWithView = async (
   viewId: string,
   entityId?: string
 ) => {
   const view = await getEntityById(viewId);
-  console.log("Loaded view:", view);
   if (!view) {
     throw new Error(`View with ID ${viewId} not found`);
   }
