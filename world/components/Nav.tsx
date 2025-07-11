@@ -5,8 +5,9 @@ import styles from "./Nav.module.css";
 // import LogoutButton from "./LogoutButton";
 
 const navItems = [
-  { label: "Home", href: "/" },
+  // { label: "Home", href: "/" },
   { label: "Blog", href: "/view/view-postListView" },
+  { label: "About", href: "/about" },
 ];
 
 export default async function Nav() {
