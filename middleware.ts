@@ -1,10 +1,10 @@
 import { type NextRequest } from "next/server";
-import { updateSession } from "@core/adapters/supabase/middleware";
+import { updateSession } from "@adapters/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
   return await updateSession(request);
 }
 
 export const config = {
-  matcher: ["/private"],
+  matcher: ["/private", "/entities"],
 };

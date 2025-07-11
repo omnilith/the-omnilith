@@ -1,0 +1,58 @@
+/* Cyberpunk minimal style for EntityEditor */
+
+.entityEditorForm {
+  background: #181a20;
+  border-radius: 16px;
+  border: 1.5px solid #0fffc3;
+  box-shadow: 0 0 24px #0fffc355;
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 480px;
+  margin: 2rem auto;
+  font-family: "Share Tech Mono", "Orbitron", "Fira Mono", monospace, sans-serif;
+  color: #e0e0e0;
+}
+
+.entityEditorForm h2 {
+  color: #0fffc3;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px #0fffc3aa;
+}
+
+.entityEditorField {
+  margin-bottom: 1.5rem;
+}
+
+.entityEditorLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #ff00cc;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.entityEditorButton {
+  background: linear-gradient(90deg, #0fffc3 0%, #ff00cc 100%);
+  color: #181a20;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.1rem;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 12px #0fffc355, 0 0 8px #ff00cc55;
+  transition: filter 0.2s, box-shadow 0.2s;
+}
+
+.entityEditorButton:disabled {
+  opacity: 0.6;
+  filter: grayscale(0.5);
+  cursor: not-allowed;
+}
+
+.entityEditorButton:not(:disabled):hover {
+  filter: brightness(1.2) drop-shadow(0 0 8px #ff00cc);
+  box-shadow: 0 0 24px #ff00cc99, 0 0 16px #0fffc399;
+}

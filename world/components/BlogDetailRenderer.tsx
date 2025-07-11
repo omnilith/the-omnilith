@@ -2,7 +2,7 @@
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import styles from "./BlogDetailRenderer.module.css";
-import { Entity } from "@core/core/entities/entityTypes";
+import { Entity } from "@core/entities/entityTypes";
 
 function getYouTubeEmbedUrl(url: string) {
   // Extract the video ID from various YouTube URL formats

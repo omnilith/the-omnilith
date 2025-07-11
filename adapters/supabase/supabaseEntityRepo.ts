@@ -1,10 +1,10 @@
 import { createClient } from "./server";
-import { EntityRepository } from "@core/core/entities/entityRepository";
+import { EntityRepository } from "@core/entities/entityRepository";
 import {
   convertDBtoAppEntity,
   convertAppToDBEntity,
   DBEntity,
-} from "@core/lib/conversion/entityConverters";
+} from "@lib/conversion/entityConverters";
 
 export const supabaseEntityRepo: EntityRepository = {
   async getById(id) {
