@@ -17,7 +17,13 @@ export function FieldInput({
     return (
       <input
         className={styles.fieldInput}
-        value={value as string}
+        value={
+          typeof value === "string"
+            ? value
+            : value === undefined || value === null
+            ? ""
+            : String(value)
+        }
         onChange={(e) => onChange(e.target.value)}
       />
     );
@@ -28,7 +34,13 @@ export function FieldInput({
       <input
         type="number"
         className={styles.fieldInput}
-        value={value as number}
+        value={
+          typeof value === "number"
+            ? value
+            : value === undefined || value === null
+            ? ""
+            : String(value)
+        }
         onChange={(e) => onChange(Number(e.target.value))}
       />
     );
@@ -49,7 +61,13 @@ export function FieldInput({
     return (
       <select
         className={styles.fieldInputSelect}
-        value={value as string}
+        value={
+          typeof value === "string"
+            ? value
+            : value === undefined || value === null
+            ? ""
+            : String(value)
+        }
         onChange={(e) => onChange(e.target.value)}
       >
         {options?.map((opt: string) => (
@@ -65,7 +83,11 @@ export function FieldInput({
     return (
       <textarea
         className={styles.fieldInputTextarea}
-        value={JSON.stringify(value, null, 2)}
+        value={
+          value !== undefined && value !== null
+            ? JSON.stringify(value, null, 2)
+            : ""
+        }
         onChange={(e) => {
           try {
             onChange(JSON.parse(e.target.value));
@@ -79,7 +101,13 @@ export function FieldInput({
     return (
       <textarea
         className={styles.fieldInputTextarea}
-        value={value as string}
+        value={
+          typeof value === "string"
+            ? value
+            : value === undefined || value === null
+            ? ""
+            : String(value)
+        }
         onChange={(e) => onChange(e.target.value)}
         placeholder="Enter Markdown here..."
         rows={8}
