@@ -67,6 +67,11 @@ export function EntityEditor({
                   ? (def.options as string[])
                   : undefined
               }
+              referenceType={
+                def.type === "reference" && def.referenceType
+                  ? String(def.referenceType)
+                  : undefined
+              }
             />
           </div>
         );
