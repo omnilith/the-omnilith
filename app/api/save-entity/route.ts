@@ -19,8 +19,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: err as Error }, { status: 500 });
     }
   } else {
+    let id: string = "";
+    let titlePart: string = "";
+
+    if (body.essence?.title) {
+      titlePart = `-${body.essence.title.replace(/\s+/g, "-").toLowerCase()}`;
+    } else if (body.essence?.key) {
+      titlePart = `-${body.essence.key}`;
+    }
+
+    id = body.type.toLowerCase() + titlePart + "-" + uuidv4();
+
     entity = {
-      id: body.type.toLowerCase() + "-" + uuidv4(),
+      id,
       type: body.type,
       essence: body.essence,
       createdAt: new Date().toISOString(),
