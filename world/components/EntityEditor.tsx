@@ -9,10 +9,12 @@ export function EntityEditor({
   form,
   fields,
   initialEssence = {},
+  id,
 }: {
   form: Entity;
   fields: Entity[];
   initialEssence?: Record<string, unknown>;
+  id?: string;
 }) {
   const [essence, setEssence] = useState(initialEssence);
   const [submitting, setSubmitting] = useState(false);
@@ -30,6 +32,7 @@ export function EntityEditor({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          ...(id ? { id } : {}),
           type: form.essence.title,
           essence,
         }),

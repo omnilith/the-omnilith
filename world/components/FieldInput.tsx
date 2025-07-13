@@ -18,7 +18,8 @@ export function FieldInput({
   referenceType?: string;
   list?: boolean;
 }) {
-  if (type === "text") {
+  if (type === "text" || type === "file") {
+    //TODO: handle file uploads
     return (
       <input
         className={styles.fieldInput}

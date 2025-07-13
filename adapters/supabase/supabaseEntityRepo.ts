@@ -50,12 +50,18 @@ export const supabaseEntityRepo: EntityRepository = {
       updated_at: new Date().toISOString(),
     };
 
-    const { error } = await supabase
+    const { data: updated, error } = await supabase
       .from("entity")
       .update(updateFields)
-      .eq("id", id);
+      .eq("id", id)
+      .select();
 
-    if (error) throw new Error(error.message);
+    if (error) {
+      throw new Error(error.message);
+    }
+    if (!updated || updated.length === 0) {
+      throw new Error("No entity updated. Check if the ID exists.");
+    }
   },
 
   async delete(id) {
