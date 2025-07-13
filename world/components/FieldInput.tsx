@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import styles from "./FieldInput.module.css";
+import { ReferenceInput } from "./ReferenceInput";
 
 export function FieldInput({
   type,
@@ -18,24 +18,6 @@ export function FieldInput({
   referenceType?: string;
   list?: boolean;
 }) {
-  // Always declare hooks at the top level
-  const [entities, setEntities] = useState<
-    { id: string; essence?: { name?: string; label?: string } }[]
-  >([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (type === "reference" && referenceType) {
-      console.log("Fetching entities for reference type:", referenceType);
-      setLoading(true);
-      fetch(`/api/get-entities/${referenceType}`)
-        .then((res) => res.json())
-        .then((data) => setEntities(data))
-        .catch(() => setEntities([]))
-        .finally(() => setLoading(false));
-    }
-  }, [type, referenceType]);
-
   if (type === "text") {
     return (
       <input
@@ -112,43 +94,13 @@ export function FieldInput({
   }
 
   if (type === "reference") {
-    if (loading) return <div>Loading references...</div>;
-    if (list) {
-      // Multi-select for references
-      return (
-        <select
-          className={styles.fieldInputSelect}
-          multiple
-          value={Array.isArray(value) ? value.map(String) : []}
-          onChange={(e) => {
-            const selected = Array.from(e.target.selectedOptions).map(
-              (opt) => opt.value
-            );
-            onChange(selected);
-          }}
-        >
-          {entities.map((entity) => (
-            <option key={entity.id} value={entity.id}>
-              {entity.essence?.name || entity.essence?.label || entity.id}
-            </option>
-          ))}
-        </select>
-      );
-    }
-    // Single select for references
     return (
-      <select
-        className={styles.fieldInputSelect}
-        value={value as string}
-        onChange={(e) => onChange(e.target.value)}
-      >
-        <option value="">Select reference...</option>
-        {entities.map((entity) => (
-          <option key={entity.id} value={entity.id}>
-            {entity.essence?.name || entity.essence?.label || entity.id}
-          </option>
-        ))}
-      </select>
+      <ReferenceInput
+        value={value}
+        onChange={onChange}
+        referenceType={referenceType}
+        list={list}
+      />
     );
   }
 
