@@ -1,6 +1,7 @@
 import { loadEntitiesWithView } from "@lib/queries/loadEntitiesWithView";
 import BlogListRenderer from "@world/components/BlogListRenderer";
 import BlogDetailRenderer from "@world/components/BlogDetailRenderer";
+import { ListRenderer } from "@world/components/ListRenderer";
 // import { BlogType } from "@core/core/data/entities";
 import { Entity } from "@core/entities/entityTypes";
 
@@ -24,6 +25,14 @@ async function page({
     entityId: string | undefined;
   };
   const { entities, view } = await loadEntitiesWithView(id, entityId);
+
+  if (view.essence.layout === "list") {
+    return (
+      <div>
+        <ListRenderer view={view} entities={entities as Entity[]} />
+      </div>
+    );
+  }
 
   const Renderer = rendererMap[view.essence.rendererComponent as RendererKey];
   if (!Renderer) {

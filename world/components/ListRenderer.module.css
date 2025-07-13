@@ -1,0 +1,85 @@
+.listRenderer {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #18182a 80%, #2d0b37 100%);
+  border-radius: 20px;
+  box-shadow: 0 0 32px 4px #0ff8fc44, 0 2px 24px #000a;
+  font-family: "Orbitron", "Share Tech Mono", "Inter", "Segoe UI", Arial,
+    sans-serif;
+  border: 2px solid #0ff8fc;
+}
+
+.listRenderer h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #0ff8fc;
+  text-shadow: 0 0 8px #0ff8fc88, 0 0 2px #fff;
+  letter-spacing: 2px;
+}
+
+.listRenderer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listRendererItem {
+  background: linear-gradient(90deg, #2d0b37 60%, #18182a 100%);
+  border-radius: 14px;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 0 0 16px 2px #ff00cc44, 0 2px 8px #000a;
+  border: 1.5px solid #ff00cc;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.listRendererItem:hover {
+  box-shadow: 0 0 32px 4px #ff00cc88, 0 4px 16px #0ff8fc44;
+  border-color: #0ff8fc;
+}
+
+.listRendererItem ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.listRendererItem li {
+  flex: 1 1 200px;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.listRendererItem strong {
+  color: #0070f3;
+  font-weight: 500;
+  margin-right: 0.5em;
+}
+
+.listRendererFields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.listRendererField {
+  flex: 1 1 180px;
+  margin-bottom: 0.5rem;
+  font-size: 1.08rem;
+  color: #e0e0fa;
+  background: rgba(30, 0, 50, 0.4);
+  border-radius: 8px;
+  padding: 0.5em 0.75em;
+  box-shadow: 0 0 8px #0ff8fc22;
+}
+
+.listRendererLabel {
+  color: #ff00cc;
+  font-weight: 600;
+  margin-right: 0.5em;
+  text-shadow: 0 0 4px #ff00cc88;
+  letter-spacing: 1px;
+}

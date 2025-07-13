@@ -41,6 +41,7 @@ export function EntityEditor({
       if (!res.ok) throw new Error("Failed to save");
 
       alert("Entity saved!");
+      setEssence({});
     } catch (err) {
       alert((err as Error).message);
     } finally {

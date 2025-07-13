@@ -52,10 +52,12 @@ export function FieldInput({
   }
 
   if (type === "select") {
+    // If value is not set, default to first option
+    const selectValue = (value ?? options?.[0]) as string;
     return (
       <select
         className={styles.fieldInputSelect}
-        value={value as string}
+        value={selectValue}
         onChange={(e) => onChange(e.target.value)}
       >
         {options?.map((opt: string) => (
