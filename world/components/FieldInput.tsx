@@ -9,12 +9,14 @@ export function FieldInput({
   onChange,
   options,
   referenceType,
+  list,
 }: {
   type: string;
   value: unknown;
   onChange: (val: unknown) => void;
   options?: string[];
   referenceType?: string;
+  list?: boolean;
 }) {
   // Always declare hooks at the top level
   const [entities, setEntities] = useState<
@@ -111,6 +113,29 @@ export function FieldInput({
 
   if (type === "reference") {
     if (loading) return <div>Loading references...</div>;
+    if (list) {
+      // Multi-select for references
+      return (
+        <select
+          className={styles.fieldInputSelect}
+          multiple
+          value={Array.isArray(value) ? value.map(String) : []}
+          onChange={(e) => {
+            const selected = Array.from(e.target.selectedOptions).map(
+              (opt) => opt.value
+            );
+            onChange(selected);
+          }}
+        >
+          {entities.map((entity) => (
+            <option key={entity.id} value={entity.id}>
+              {entity.essence?.name || entity.essence?.label || entity.id}
+            </option>
+          ))}
+        </select>
+      );
+    }
+    // Single select for references
     return (
       <select
         className={styles.fieldInputSelect}

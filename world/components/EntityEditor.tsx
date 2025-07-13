@@ -30,7 +30,7 @@ export function EntityEditor({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: form.essence.name,
+          type: form.essence.title,
           essence,
         }),
       });
@@ -47,7 +47,7 @@ export function EntityEditor({
 
   return (
     <form onSubmit={handleSubmit} className={styles.entityEditorForm}>
-      <h2>{String(form.essence.name)}</h2>
+      <h2>{String(form.essence.title)}</h2>
 
       {fields.map((field) => {
         const def = field.essence;
@@ -72,6 +72,7 @@ export function EntityEditor({
                   ? String(def.referenceType)
                   : undefined
               }
+              list={def.type === "reference" && def.list === true}
             />
           </div>
         );
