@@ -5,6 +5,8 @@ import { getEntitiesByType } from "@lib/persistence/entityService";
 import { Entity } from "@core/entities/entityTypes";
 import { resolveEntityReferences } from "@core/semantics/resolveEntityReferences";
 
+//TODO: Move required from FieldDefinition to fields in Form
+
 export const loadEntitiesWithView = async (
   viewId: string,
   entityId?: string

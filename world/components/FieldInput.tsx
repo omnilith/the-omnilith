@@ -69,6 +69,7 @@ export function FieldInput({
     );
   }
 
+  //TODO: Update to be object
   if (type === "json-editor") {
     return (
       <textarea

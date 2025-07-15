@@ -6,6 +6,8 @@ import {
   DBEntity,
 } from "@lib/conversion/entityConverters";
 
+//TODO: Consider consoldiatiing insert and update into a single upsert method
+
 export const supabaseEntityRepo: EntityRepository = {
   async getById(id) {
     const supabase = await createClient();
@@ -50,7 +52,7 @@ export const supabaseEntityRepo: EntityRepository = {
       updated_at: new Date().toISOString(),
     };
 
-    const { data: updated, error } = await supabase
+    const { error } = await supabase
       .from("entity")
       .update(updateFields)
       .eq("id", id)
@@ -58,9 +60,6 @@ export const supabaseEntityRepo: EntityRepository = {
 
     if (error) {
       throw new Error(error.message);
-    }
-    if (!updated || updated.length === 0) {
-      throw new Error("No entity updated. Check if the ID exists.");
     }
   },
 
