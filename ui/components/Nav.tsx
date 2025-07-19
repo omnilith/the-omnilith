@@ -18,7 +18,7 @@ export default async function Nav() {
     <nav className={styles.mainNav}>
       <div>
         <Link href="/" className={styles.mainLogo}>
-          <span>Omnilith</span>
+          <span>Lucidness</span>
         </Link>
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>
