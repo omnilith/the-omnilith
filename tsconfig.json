@@ -22,7 +22,7 @@
     "paths": {
       "@core/*": ["core/*"],
       "@lib/*": ["lib/*"],
-      "@world/*": ["world/*"],
+      "@world/*": ["ui/*"],
       "@adapters/*": ["adapters/*"]
     }
   },
