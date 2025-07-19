@@ -1,5 +1,5 @@
 import { getEntityById } from "@lib/persistence/entityService";
-import { loadFormWithFields } from "@lib/queries/loadFormWithFields";
+import { loadFormWithResolvedSchema } from "@lib/queries/loadFormWithFields";
 import { EntityEditor } from "@world/components/EntityEditor";
 
 type PageProps = {
@@ -12,7 +12,9 @@ async function Page({ params }: PageProps) {
   if (!entity) {
     return <div>Entity not found.</div>;
   }
-  const { form, fields } = await loadFormWithFields("form-" + entity.type);
+  const { form, fields } = await loadFormWithResolvedSchema(
+    "form-" + entity.type
+  );
   return (
     <div>
       <EntityEditor

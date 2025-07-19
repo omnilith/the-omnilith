@@ -2,6 +2,8 @@
 
 import styles from "./FieldInput.module.css";
 import { ReferenceInput } from "./ReferenceInput";
+import { Entity } from "@core/entities/entityTypes";
+import { EntityEditor } from "./EntityEditor";
 
 export function FieldInput({
   type,
@@ -9,6 +11,7 @@ export function FieldInput({
   onChange,
   options,
   referenceType,
+  resolvedSubForm,
   list,
 }: {
   type: string;
@@ -17,6 +20,10 @@ export function FieldInput({
   options?: string[];
   referenceType?: string;
   list?: boolean;
+  resolvedSubForm?: {
+    form: Entity;
+    fields: Array<{ field: Entity; required: boolean }>;
+  };
 }) {
   if (type === "text" || type === "file") {
     //TODO: handle file uploads
@@ -69,18 +76,54 @@ export function FieldInput({
     );
   }
 
-  //TODO: Update to be object
-  if (type === "json-editor") {
+  if (type === "sub-form" && resolvedSubForm) {
+    const isList = list === true;
+    const entries = isList
+      ? Array.isArray(value)
+        ? value
+        : typeof value === "object" && value !== null
+        ? [value]
+        : [{}]
+      : [typeof value === "object" && value !== null ? value : {}];
+
     return (
-      <textarea
-        className={styles.fieldInputTextarea}
-        value={JSON.stringify(value, null, 2)}
-        onChange={(e) => {
-          try {
-            onChange(JSON.parse(e.target.value));
-          } catch {}
-        }}
-      />
+      <div className={styles.subFormWrapper}>
+        {entries.map((entry, idx) => (
+          <EntityEditor
+            key={idx}
+            form={resolvedSubForm.form}
+            fields={resolvedSubForm.fields}
+            initialEssence={
+              typeof entry === "object" && entry !== null
+                ? (entry as Record<string, unknown>)
+                : {}
+            }
+            onEssenceChange={(newVal) => {
+              setTimeout(() => {
+                const updated = [...entries];
+                updated[idx] = newVal;
+                onChange(updated);
+              }, 0);
+            }}
+            noForm
+          />
+        ))}
+
+        {list && (
+          <button
+            type="button"
+            className={styles.subFormAddButton}
+            onClick={() => {
+              const next = isList
+                ? [...entries, {} as Record<string, unknown>] // ✅ Always an object
+                : [{}];
+              onChange(next);
+            }}
+          >
+            + Add Item
+          </button>
+        )}
+      </div>
     );
   }
 

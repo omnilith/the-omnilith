@@ -1,4 +1,4 @@
-import { loadFormWithFields } from "@lib/queries/loadFormWithFields";
+import { loadFormWithResolvedSchema } from "@lib/queries/loadFormWithFields";
 import { EntityEditor } from "@world/components/EntityEditor";
 
 type PageProps = {
@@ -7,7 +7,7 @@ type PageProps = {
 
 async function Page({ params }: PageProps) {
   const { id } = await params;
-  const { form, fields } = await loadFormWithFields(id);
+  const { form, fields } = await loadFormWithResolvedSchema(id);
   return (
     <div>
       <EntityEditor form={form} fields={fields} />

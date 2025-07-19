@@ -1,26 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FieldInput } from "./FieldInput";
 import { Entity } from "@core/entities/entityTypes";
 import styles from "./EntityEditor.module.css";
+
+interface EnrichedField {
+  field: Entity;
+  required: boolean;
+  resolvedSubForm?: Entity & {
+    _resolvedFields?: EnrichedField[];
+  };
+}
 
 export function EntityEditor({
   form,
   fields,
   initialEssence = {},
   id,
+  onEssenceChange,
+  noForm = false,
 }: {
   form: Entity;
-  fields: Entity[];
+  fields: EnrichedField[];
   initialEssence?: Record<string, unknown>;
   id?: string;
+  onEssenceChange?: (essence: Record<string, unknown>) => void;
+  noForm?: boolean;
 }) {
   const [essence, setEssence] = useState(initialEssence);
   const [submitting, setSubmitting] = useState(false);
 
+  const didMount = useRef(false);
+
+  useEffect(() => {
+    if (!noForm && onEssenceChange && didMount.current) {
+      onEssenceChange(essence);
+    } else {
+      didMount.current = true;
+    }
+  }, [essence, onEssenceChange, noForm]);
+
   const update = (key: string, value: unknown) => {
-    setEssence((prev) => ({ ...prev, [key]: value }));
+    setEssence((prev) => {
+      const next = { ...prev, [key]: value };
+      if (onEssenceChange) onEssenceChange(next);
+      return next;
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,23 +75,26 @@ export function EntityEditor({
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit} className={styles.entityEditorForm}>
-      <h2>{String(form.essence.title)}</h2>
+  const renderFields = () => (
+    <>
+      {!noForm && <h2>{String(form.essence.title)}</h2>}
 
       {fields.map((field) => {
-        const def = field.essence;
-        const value = essence[def.key as string] ?? def.default ?? "";
+        const def = field.field.essence;
+        const key = def.key as string;
+        const value = essence[key] ?? def.default ?? "";
+
         return (
-          <div key={String(def.key)} className={styles.entityEditorField}>
+          <div key={key} className={styles.entityEditorField}>
             <label className={styles.entityEditorLabel}>
               {String(def.label)}
-              {def.required ? " *" : ""}
+              {field.required ? " *" : ""}
             </label>
+
             <FieldInput
               type={def.type as string}
               value={value}
-              onChange={(val) => update(def.key as string, val)}
+              onChange={(val) => update(key, val)}
               options={
                 Array.isArray(def.options)
                   ? (def.options as string[])
@@ -76,12 +105,27 @@ export function EntityEditor({
                   ? String(def.referenceType)
                   : undefined
               }
-              list={def.type === "reference" && def.list === true}
+              list={def.list === true}
+              resolvedSubForm={
+                def.type === "sub-form" && field.resolvedSubForm
+                  ? {
+                      form: field.resolvedSubForm,
+                      fields: field.resolvedSubForm._resolvedFields || [],
+                    }
+                  : undefined
+              }
             />
           </div>
         );
       })}
+    </>
+  );
 
+  return noForm ? (
+    <div className={styles.entityEditorForm}>{renderFields()}</div>
+  ) : (
+    <form onSubmit={handleSubmit} className={styles.entityEditorForm}>
+      {renderFields()}
       <button
         type="submit"
         className={styles.entityEditorButton}

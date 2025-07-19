@@ -1,32 +1,78 @@
 import { getEntityById } from "@lib/persistence/entityService";
-import { resolveFieldsFromForm } from "@core/semantics/resolveFieldFromForm";
 import { Entity } from "@core/entities/entityTypes";
+import { resolveFormFields } from "@core/semantics/resolveFormFields";
+import { ResolvedFormField } from "@core/entities/entityTypes";
 
-export async function loadFormWithFields(formId: string) {
+export async function loadFormWithResolvedSchema(
+  formId: string,
+  depth = 0,
+  maxDepth = 2
+): Promise<{ form: Entity; fields: ResolvedFormField[] }> {
+  if (depth > maxDepth) {
+    throw new Error("Max sub-form depth exceeded");
+  }
+
   const form = await getEntityById(formId);
   if (!form) throw new Error(`Form with ID ${formId} not found`);
 
-  interface FormEssenceWithFields {
-    fields: string[];
-    [key: string]: unknown;
+  const rawFields = form.essence?.fields;
+  if (!Array.isArray(rawFields)) {
+    throw new Error(`Form essence.fields must be an array`);
   }
 
-  if (
-    !form.essence ||
-    !Array.isArray((form.essence as FormEssenceWithFields).fields)
-  ) {
-    throw new Error(`Form essence fields are missing or not an array`);
+  // Support both strings and { id, required } objects
+  type FormFieldRef = string | { id: string; required?: boolean };
+
+  const fieldIds: string[] = rawFields.map((f: FormFieldRef) =>
+    typeof f === "string" ? f : f.id
+  );
+
+  const fieldDefs: Entity[] = (
+    await Promise.all(fieldIds.map(getEntityById))
+  ).filter((e): e is Entity => e !== null);
+
+  const subFormIds = fieldDefs
+    .filter((f) => f.essence?.type === "sub-form")
+    .map((f) => f.essence?.form)
+    .filter((id): id is string => typeof id === "string");
+
+  const subForms: Entity[] = (
+    await Promise.all(subFormIds.map(getEntityById))
+  ).filter((e): e is Entity => e !== null);
+
+  const subFormMap: Record<string, Entity> = {};
+
+  for (const subForm of subForms) {
+    const resolved = await loadFormWithResolvedSchema(
+      subForm.id,
+      depth + 1,
+      maxDepth
+    );
+    subForm._resolvedFields = resolved.fields;
+    subFormMap[subForm.id] = subForm;
   }
 
-  const allFields: Entity[] = (
-    await Promise.all(
-      (form.essence as { fields: string[] }).fields.map((id) =>
-        getEntityById(id)
-      )
-    )
-  ).filter((field): field is Entity => field !== null);
+  const resolvedFields = resolveFormFields(form, [
+    ...fieldDefs,
+    ...subForms,
+  ]).map((field): ResolvedFormField => {
+    const fieldDef = field.field;
+    const subFormId =
+      fieldDef.essence?.type === "sub-form"
+        ? (fieldDef.essence.form as string)
+        : undefined;
 
-  const fields = resolveFieldsFromForm(form, allFields);
+    const resolvedSubForm = subFormId ? subFormMap[subFormId] : undefined;
 
-  return { form, fields };
+    return {
+      field: fieldDef,
+      required: field.required,
+      ...(resolvedSubForm && { resolvedSubForm }),
+    };
+  });
+
+  return {
+    form,
+    fields: resolvedFields,
+  };
 }
